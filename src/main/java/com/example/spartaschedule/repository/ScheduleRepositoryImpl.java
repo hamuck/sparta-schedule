@@ -60,17 +60,10 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
     }
 
     @Override
-    public Schedule findScheduleByIdOrElseThrow(Long id) {
-        List<Schedule> result = jdbcTemplate.query("select * from Schedule where id = ?", scheduleRowMapperToSchedule(), id);
-        return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id));
-    }
-
-    @Override
     public Optional<Schedule> findScheduleById(Long id){
         List<Schedule> result = jdbcTemplate.query("select * from Schedule where id = ?",scheduleRowMapperToSchedule(),id);
         return result.stream().findAny();
     }
-
 
     @Override
     public List<ScheduleResponseDto> findScheduleByDate(int days) {

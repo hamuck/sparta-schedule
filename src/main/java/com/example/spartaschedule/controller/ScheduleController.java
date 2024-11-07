@@ -2,7 +2,11 @@ package com.example.spartaschedule.controller;
 
 import com.example.spartaschedule.dto.ScheduleRequestDto;
 import com.example.spartaschedule.dto.ScheduleResponseDto;
+import com.example.spartaschedule.dto.UserRequestDto;
+import com.example.spartaschedule.dto.UserResponseDto;
 import com.example.spartaschedule.service.ScheduleService;
+import com.example.spartaschedule.service.UserService;
+import com.example.spartaschedule.service.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +18,23 @@ import java.util.List;
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
+    private final UserService userService;
 
-    public ScheduleController(ScheduleService scheduleService){
+    public ScheduleController(ScheduleService scheduleService, UserService userService){
         this.scheduleService = scheduleService;
+        this.userService = userService;
     }
 
     @PostMapping
     public ResponseEntity<ScheduleResponseDto> createSchedule(@RequestBody ScheduleRequestDto dto){
         return new ResponseEntity<>(scheduleService.saveSchedule(dto),HttpStatus.CREATED);
     }
+
+    @PostMapping("/users")
+    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto dto){
+        return new ResponseEntity<>(userService.saveUser(dto),HttpStatus.CREATED);
+    }
+
 
     @GetMapping
     public List<ScheduleResponseDto> findAllSchedules(){

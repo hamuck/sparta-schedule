@@ -29,7 +29,7 @@ public class ScheduleServiceImpl implements ScheduleService{
         ){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"The username, password, title and contents are not required values.");
         }
-        Number userId = userRepository.saveUser(schedule);
+        Number userId = userRepository.saveUserToSchedule(schedule);
         return scheduleRepository.saveSchedule(schedule, userId);
     }
 

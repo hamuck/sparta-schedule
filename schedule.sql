@@ -1,7 +1,9 @@
 CREATE TABLE User(
                      id INT not null AUTO_INCREMENT primary key,
                      name varchar(50) not null,
-                     mail varchar(50)
+                     mail varchar(50),
+                     createAt timestamp default CURRENT_TIMESTAMP,
+                     updateAt timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE Schedule (
