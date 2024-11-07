@@ -54,6 +54,11 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
         return jdbcTemplate.query("select * from Schedule", scheduleRowMapperToResponseDto());
     }
 
+    public Schedule findScheduleByUserIdOrElseThrow(Long id) {
+        List<Schedule> result = jdbcTemplate.query("select * from Schedule where userId = ?", scheduleRowMapperToSchedule(), id);
+        return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id));
+    }
+
     @Override
     public Schedule findScheduleByIdOrElseThrow(Long id) {
         List<Schedule> result = jdbcTemplate.query("select * from Schedule where id = ?", scheduleRowMapperToSchedule(), id);
