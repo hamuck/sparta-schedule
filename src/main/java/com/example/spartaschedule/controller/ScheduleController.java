@@ -6,7 +6,6 @@ import com.example.spartaschedule.dto.UserRequestDto;
 import com.example.spartaschedule.dto.UserResponseDto;
 import com.example.spartaschedule.service.ScheduleService;
 import com.example.spartaschedule.service.UserService;
-import com.example.spartaschedule.service.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +38,11 @@ public class ScheduleController {
     @GetMapping
     public List<ScheduleResponseDto> findAllSchedules(){
         return scheduleService.findAllSchedules();
+    }
+
+    @GetMapping("/page/{pages}")
+    public List<ScheduleResponseDto> findAllScheduleByPage(@PathVariable int pages){
+        return scheduleService.findAllSchedulesByPage(pages, 5);
     }
 
     @GetMapping("/{userId}")

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,6 +39,26 @@ public class ScheduleServiceImpl implements ScheduleService{
         List<ScheduleResponseDto> allSchedules = scheduleRepository.findAllSchedules();
         return allSchedules;
     }
+
+    @Override
+    public List<ScheduleResponseDto> findAllSchedulesByPage(int page, int pageSize) {
+        List<ScheduleResponseDto> allSchedules = scheduleRepository.findAllSchedules();
+        List<ScheduleResponseDto> pageSchedules = new ArrayList<>();
+
+        int start = (page - 1) * pageSize;
+        int end = Math.min(start + pageSize, allSchedules.size());
+
+
+        if (start >= allSchedules.size() || start < 0) {
+            return pageSchedules;
+        }
+
+        for (int i = start; i < end; i++) {
+            pageSchedules.add(allSchedules.get(i));
+        }
+        return pageSchedules;
+    }
+
 
     @Override
     public ScheduleResponseDto findScheduleByUserId(Long id){
