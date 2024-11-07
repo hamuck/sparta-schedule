@@ -37,7 +37,6 @@
 
 |  파라미터 |타입   | 필수여부  | 설명  |
 |---|---|---|---|
-| id|Integer| 필수  | 일정 고유 번호  |
 | password  | String  | 필수  | 일정 비밀 번호  | 
 |  username | String  | 필수  |  일정 작성자 이름 |
 | title | String | 필수 | 일정 제목|
@@ -46,13 +45,27 @@
 **Response**
 ```json
 {
-"id" : "1"
+  "id": 1,
+  "userId": 1,
+  "userName": "이름",
+  "title": "제목",
+  "contents": "내용",
+  "createAt": "2024-11-07T09:00:10.349+00:00",
+  "updateAt": "2024-11-07T09:00:10.349+00:00"
 }
 ```
 
-|  파라미터 |타입   | 필수여부  | 설명  |
-|---|---|---|---|
-| id|Integer| 필수  | 일정 고유 번호  |
+| 파라미터     | 타입        | 필수여부 | 설명                        |
+|----------|-----------|------|---------------------------|
+| id       | Integer   | 필수   | 일정 고유 번호                  |
+| userId   | Integer   | 필수   | 사용자 고유 번호                 |
+| username | String    | 필수   | 일정 작성자 이름                 |
+| title    | String    | 필수   | 일정 제목                     |
+| content  | String    | 선택   | 일정 상세 내용                  |
+| createAt | Timestamp | 필수   | 일정 작성 시간                  |
+| updateAt | Timestamp | 필수   | 일정 작성 시간 (수정시 수정 시간으로 변경) |
+
+
 
 
 ---
@@ -69,35 +82,46 @@
 
 **Response**
 ```json
-{
-"page" : "1",
-"size" : "10",
-"totalPage" : "15",
-"totalCount" : "150",
-"data" : [
+[
     {
-    "scheduleId" : "1",
-    "title" : "제목1",
-    "content" : "내용1"
+        "id": 1,
+        "userId": 1,
+        "userName": "이름1",
+        "title": "제목1",
+        "contents": "내용1",
+        "createAt": "2024-11-07T07:42:10.000+00:00",
+        "updateAt": "2024-11-07T07:42:10.000+00:00"
     },
-  {
-    "schedulId" : "2",
-    "title" : "제목2",
-    "content" : "내용2"
+    {
+        "id": 2,
+        "userId": 2,
+        "userName": "이름2",
+        "title": "제목2",
+        "contents": "내용2",
+        "createAt": "2024-11-07T09:00:10.000+00:00",
+        "updateAt": "2024-11-07T09:00:10.000+00:00"
+    },
+    {
+        "id": 3,
+        "userId": 3,
+        "userName": "이름3",
+        "title": "제목3",
+        "contents": "내용3",
+        "createAt": "2024-11-07T09:02:56.000+00:00",
+        "updateAt": "2024-11-07T09:02:56.000+00:00"
     }
-  ]
-}
+]
 ```
-|  파라미터 |타입   | 필수여부  | 설명  |
-|---|---|---|---|
-| page|Integer| 필수  | 페이지 번호  |
-| size  | Integer  | 필수  | 한 페이지 당 표시되는 일정 개수  | 
-|  totalPage | Integer  | 필수  |  전체 페이지 수 |
-|  totalCount | Integer  | 필수  | 전체 포스트 수  |
-| data | Integer | 필수 | 일정 목록 |
-| id | Integer | 필수 | 일정 고유 번호|
-| title | String | 필수 | 일정 제목|
-|content| String | 선택 | 일정 상세 내용|
+| 파라미터     | 타입        | 필수여부 | 설명                        |
+|----------|-----------|------|---------------------------|
+| id       | Integer   | 필수   | 일정 고유 번호                  |
+| userId   | Integer   | 필수   | 사용자 고유 번호                 |
+| username | String    | 필수   | 일정 작성자 이름                 |
+| title    | String    | 필수   | 일정 제목                     |
+| content  | String    | 선택   | 일정 상세 내용                  |
+| createAt | Timestamp | 필수   | 일정 작성 시간                  |
+| updateAt | Timestamp | 필수   | 일정 작성 시간 (수정시 수정 시간으로 변경) |
+
 
 
 ---
@@ -118,27 +142,33 @@
 
 ```json
 {
-"id" : "1",
-"username" : "작성자 명",
-"createAt": "2024-10-24T14:55:00Z",
-"updateAt": "2024-10-25T09:30:00Z",
-"title" : "제목",
-"content" : "내용"
+  "id": 1,
+  "userId": 1,
+  "userName": "이름",
+  "title": "제목",
+  "contents": "내용",
+  "createAt": "2024-11-07T09:00:10.349+00:00",
+  "updateAt": "2024-11-07T09:00:10.349+00:00"
 }
 ```
 
-|  파라미터 |타입   | 필수여부  | 설명  |
-|---|---|---|---|
-| id|Integer| 필수  | 일정 고유 번호  | 
-|  username | String  | 필수  |  일정 작성자 이름 |
-|  createAt | String  | 필수  | 작성 날짜  |
-| updateAt | String | 필수 | 수정 날짜 |
-| title | String | 필수 | 일정 제목|
-| content | String | 선택 | 일정 상세 내용|
+| 파라미터     | 타입        | 필수여부 | 설명                        |
+|----------|-----------|------|---------------------------|
+| id       | Integer   | 필수   | 일정 고유 번호                  |
+| userId   | Integer   | 필수   | 사용자 고유 번호                 |
+| username | String    | 필수   | 일정 작성자 이름                 |
+| title    | String    | 필수   | 일정 제목                     |
+| content  | String    | 선택   | 일정 상세 내용                  |
+| createAt | Timestamp | 필수   | 일정 작성 시간                  |
+| updateAt | Timestamp | 필수   | 일정 작성 시간 (수정시 수정 시간으로 변경) |
+
 
 ---
 ## 날짜 선택 일정 조회
-선택한 일정의 상세 내역을 조회합니다.
+PathVariable로 받은 숫자 값 전의 날짜들의 일정을 보여줍니다.
+
+예시) /schedules/date/60 일시,
+<br>현재 날짜 -60 일 까지의 일정 목록을 Response
 
 |메서드| 요청 URL                                        |
 |---|-----------------------------------------------|
@@ -150,26 +180,47 @@
 
 
 **Response**
-
 ```json
-{
-"id" : "1",
-"username" : "작성자 명",
-"createAt": "2024-10-24T14:55:00Z",
-"updateAt": "2024-10-25T09:30:00Z",
-"title" : "제목",
-"content" : "내용"
-}
+[
+    {
+        "id": 1,
+        "userId": 1,
+        "userName": "이름1",
+        "title": "제목1",
+        "contents": "내용1",
+        "createAt": "2024-11-07T07:42:10.000+00:00",
+        "updateAt": "2024-11-07T07:42:10.000+00:00"
+    },
+    {
+        "id": 2,
+        "userId": 2,
+        "userName": "이름2",
+        "title": "제목2",
+        "contents": "내용2",
+        "createAt": "2024-11-07T09:00:10.000+00:00",
+        "updateAt": "2024-11-07T09:00:10.000+00:00"
+    },
+    {
+        "id": 3,
+        "userId": 3,
+        "userName": "이름3",
+        "title": "제목3",
+        "contents": "내용3",
+        "createAt": "2024-11-07T09:02:56.000+00:00",
+        "updateAt": "2024-11-07T09:02:56.000+00:00"
+    }
+]
 ```
 
-|  파라미터 |타입   | 필수여부  | 설명  |
-|---|---|---|---|
-| id|Integer| 필수  | 일정 고유 번호  | 
-|  username | String  | 필수  |  일정 작성자 이름 |
-|  createAt | String  | 필수  | 작성 날짜  |
-| updateAt | String | 필수 | 수정 날짜 |
-| title | String | 필수 | 일정 제목|
-| content | String | 선택 | 일정 상세 내용|
+| 파라미터     | 타입        | 필수여부 | 설명                        |
+|----------|-----------|------|---------------------------|
+| id       | Integer   | 필수   | 일정 고유 번호                  |
+| userId   | Integer   | 필수   | 사용자 고유 번호                 |
+| username | String    | 필수   | 일정 작성자 이름                 |
+| title    | String    | 필수   | 일정 제목                     |
+| content  | String    | 선택   | 일정 상세 내용                  |
+| createAt | Timestamp | 필수   | 일정 작성 시간                  |
+| updateAt | Timestamp | 필수   | 일정 작성 시간 (수정시 수정 시간으로 변경) |
 
 ---
 ## 선택 일정 수정
@@ -180,9 +231,8 @@
 ```json
 {
 "password" : "비밀번호",
-"username" : "작성자 명",
-"title" : "제목",
-"content" : "내용"
+"title" : "수정된 제목",
+"content" : "수정된 내용"
 }
 ```
 
@@ -194,21 +244,32 @@
 |  파라미터 |타입   | 필수여부  | 설명  |
 |---|---|---|---|
 | password  | String  | 필수  | 일정 비밀 번호  | 
-|  username | String  | 필수  |  일정 작성자 이름 |
 | title | String | 필수 | 일정 제목|
 | content | String | 선택 | 일정 상세 내용|
 
 **Response**
+
 ```json
 {
-"id" : "1"
+  "id": 1,
+  "userId": 1,
+  "userName": "이름",
+  "title": "수정된 제목",
+  "contents": "수정된 내용",
+  "createAt": "2024-11-07T09:00:10.349+00:00",
+  "updateAt": "2024-11-08T09:00:10.349+00:00"  //수정한 날짜로 변경
 }
 ```
 
-|  파라미터 |타입   | 필수여부  | 설명  |
-|---|---|---|---|
-| id|Integer| 필수  | 일정 고유 번호  |
-
+| 파라미터     | 타입        | 필수여부 | 설명                        |
+|----------|-----------|------|---------------------------|
+| id       | Integer   | 필수   | 일정 고유 번호                  |
+| userId   | Integer   | 필수   | 사용자 고유 번호                 |
+| username | String    | 필수   | 일정 작성자 이름                 |
+| title    | String    | 필수   | 일정 제목                     |
+| content  | String    | 선택   | 일정 상세 내용                  |
+| createAt | Timestamp | 필수   | 일정 작성 시간                  |
+| updateAt | Timestamp | 필수   | 일정 작성 시간 (수정시 수정 시간으로 변경) |
 
 ---
 

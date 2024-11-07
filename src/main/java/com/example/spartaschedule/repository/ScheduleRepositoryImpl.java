@@ -73,15 +73,9 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
         return jdbcTemplate.query(sql, scheduleRowMapperToResponseDto(), days);
     }
 
-
     @Override
     public int updateSchedule(Long id,String password, String title, String contents){
-        String getPasswordSql = "SELECT password FROM Schedule WHERE id = ?";
-        String dbPassword = jdbcTemplate.queryForObject(getPasswordSql, String.class, id);
-
-        if (dbPassword == null || !dbPassword.equals(password)) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Password does not match");
-        }
+        matchPassword(id, password);
         String sql = "update Schedule set title = ?, contents = ?, updateAt = ? where id = ?";
         return jdbcTemplate.update(
                 sql,title, contents, Timestamp.valueOf(LocalDateTime.now()),id
@@ -90,15 +84,22 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
 
     @Override
     public int deleteSchedule(Long id, String password){
-        String getPasswordSql = "SELECT password FROM Schedule WHERE id = ?";
-        String dbPassword = jdbcTemplate.queryForObject(getPasswordSql, String.class, id);
-
-        if (dbPassword == null || !dbPassword.equals(password)) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Password does not match");
-        }
+        matchPassword(id, password);
         return jdbcTemplate.update(
                 "delete from Schedule where id = ?", id
         );
+    }
+
+    private boolean matchPassword(Long id,String password){
+        String getPasswordSql = "SELECT password FROM Schedule WHERE id = ?";
+        String dbPassword = jdbcTemplate.queryForObject(getPasswordSql, String.class, id);
+        boolean result = true;
+
+        if (dbPassword == null || !dbPassword.equals(password)) {
+            result = false;
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Password does not match");
+        }
+        return result;
     }
 
     private RowMapper<ScheduleResponseDto> scheduleRowMapperToResponseDto(){

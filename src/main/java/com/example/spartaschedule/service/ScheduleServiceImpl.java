@@ -3,13 +3,9 @@ package com.example.spartaschedule.service;
 import com.example.spartaschedule.dto.ScheduleRequestDto;
 import com.example.spartaschedule.dto.ScheduleResponseDto;
 import com.example.spartaschedule.entity.Schedule;
-import com.example.spartaschedule.entity.User;
 import com.example.spartaschedule.repository.ScheduleRepository;
-import com.example.spartaschedule.repository.ScheduleRepositoryImpl;
 import com.example.spartaschedule.repository.UserRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.datasource.JdbcTransactionObjectSupport;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,6 +24,11 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Override
     public ScheduleResponseDto saveSchedule(ScheduleRequestDto requestDto){
         Schedule schedule = new Schedule(requestDto.getPassword(), requestDto.getUserId(),requestDto.getUserName(),requestDto.getTitle(),requestDto.getContents());
+        if (
+                schedule.getUserName() == null || schedule.getPassword() == null || schedule.getTitle() == null || schedule.getContents() == null
+        ){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"The username, password, title and contents are not required values.");
+        }
         Number userId = userRepository.saveUser(schedule);
         return scheduleRepository.saveSchedule(schedule, userId);
     }
