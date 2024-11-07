@@ -2,6 +2,8 @@ package com.example.spartaschedule.repository;
 
 import com.example.spartaschedule.dto.ScheduleResponseDto;
 import com.example.spartaschedule.entity.Schedule;
+import com.example.spartaschedule.entity.User;
+import com.example.spartaschedule.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -29,14 +31,14 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
     }
 
     @Override
-    public ScheduleResponseDto saveSchedule(Schedule schedule){
+    public ScheduleResponseDto saveSchedule(Schedule schedule, Number userId){
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("Schedule")
                 .usingGeneratedKeyColumns("id");
 
-
         Map<String, Object> parameters = new HashMap<>();
         LocalDateTime nowTime = LocalDateTime.now();
+        parameters.put("userId",userId);
         parameters.put("password",schedule.getPassword());
         parameters.put("userName",schedule.getUserName());
         parameters.put("title",schedule.getTitle());
@@ -75,7 +77,13 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
 
 
     @Override
-    public int updateSchedule(Long id, String title, String contents){
+    public int updateSchedule(Long id,String password, String title, String contents){
+        String getPasswordSql = "SELECT password FROM Schedule WHERE id = ?";
+        String dbPassword = jdbcTemplate.queryForObject(getPasswordSql, String.class, id);
+
+        if (dbPassword == null || !dbPassword.equals(password)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Password does not match");
+        }
         String sql = "update Schedule set title = ?, contents = ?, updateAt = ? where id = ?";
         return jdbcTemplate.update(
                 sql,title, contents, Timestamp.valueOf(LocalDateTime.now()),id
@@ -83,7 +91,13 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
     }
 
     @Override
-    public int deleteSchedule(Long id){
+    public int deleteSchedule(Long id, String password){
+        String getPasswordSql = "SELECT password FROM Schedule WHERE id = ?";
+        String dbPassword = jdbcTemplate.queryForObject(getPasswordSql, String.class, id);
+
+        if (dbPassword == null || !dbPassword.equals(password)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Password does not match");
+        }
         return jdbcTemplate.update(
                 "delete from Schedule where id = ?", id
         );

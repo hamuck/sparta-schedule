@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface ScheduleRepository {
 
-    ScheduleResponseDto saveSchedule(Schedule schedule);
+    ScheduleResponseDto saveSchedule(Schedule schedule, Number userId);
     List<ScheduleResponseDto> findAllSchedules();
     Schedule findScheduleByIdOrElseThrow(Long id);
     List<ScheduleResponseDto> findScheduleByDate(int days);
     Optional<Schedule> findScheduleById(Long id);
-    int updateSchedule(Long id, String title, String contents);
-    int deleteSchedule(Long id);
+    int updateSchedule(Long id,String password, String title, String contents);
+    int deleteSchedule(Long id, String password);
 }

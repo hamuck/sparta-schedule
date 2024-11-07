@@ -40,16 +40,17 @@ public class ScheduleController {
         return scheduleService.findScheduleByDate(days);
     }
 
+    //비밀번호추가
     @PutMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> updateSchedule(
             @PathVariable Long id, @RequestBody ScheduleRequestDto dto
     ){
-        return new ResponseEntity<>(scheduleService.updateSchedule(id, dto.getTitle(),dto.getContents()),HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.updateSchedule(id,dto.getPassword(), dto.getTitle(),dto.getContents()),HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSchedule(@PathVariable Long id){
-        scheduleService.deleteSchedule(id);
+    public ResponseEntity<Void> deleteSchedule(@PathVariable Long id, @RequestBody ScheduleRequestDto dto){
+        scheduleService.deleteSchedule(id, dto.getPassword());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

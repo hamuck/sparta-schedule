@@ -11,6 +11,7 @@ public class Schedule {
 
     private Long id;
     private String password;
+    private String userId;
     private String userName;
     private String title;
     private String contents;
