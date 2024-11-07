@@ -2,8 +2,6 @@ package com.example.spartaschedule.repository;
 
 import com.example.spartaschedule.dto.ScheduleResponseDto;
 import com.example.spartaschedule.entity.Schedule;
-import com.example.spartaschedule.entity.User;
-import com.example.spartaschedule.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -110,6 +108,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
                 return new ScheduleResponseDto(
                         rs.getLong("id"),
                         rs.getString("userName"),
+                        rs.getLong("userId"),
                         rs.getString("title"),
                         rs.getString("contents"),
                         rs.getTimestamp("createAt")
@@ -125,6 +124,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
                 return new Schedule(
                         rs.getLong("id"),
                         rs.getString("userName"),
+                        rs.getLong("userId"),
                         rs.getString("title"),
                         rs.getString("contents"),
                         rs.getTimestamp("createAt"),

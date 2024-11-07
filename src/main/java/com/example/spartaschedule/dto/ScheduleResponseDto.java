@@ -1,14 +1,14 @@
 package com.example.spartaschedule.dto;
 
 import com.example.spartaschedule.entity.Schedule;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.sql.Timestamp;
 
 @Getter
 public class ScheduleResponseDto {
-    Long id;
+    private Long id;
+    private Long userId;
     private String userName;
     private String title;
     private String contents;
@@ -18,19 +18,24 @@ public class ScheduleResponseDto {
     public ScheduleResponseDto(Schedule schedule){
         this.id = schedule.getId();
         this.userName = schedule.getUserName();
+        this.userId = schedule.getUserId();
         this.title = schedule.getTitle();
         this.contents = schedule.getContents();
     }
 
-    public ScheduleResponseDto(Long id,String userName, String title, String contents){
+    public ScheduleResponseDto(Long id, String userName, String title, String contents, Timestamp timestamp){
         this.id = id;
         this.userName = userName;
         this.title = title;
         this.contents = contents;
+        this.createAt = timestamp;
+        this.updateAt = timestamp;
     }
-    public ScheduleResponseDto(Long id, String userName, String title, String contents, Timestamp timestamp){
+
+    public ScheduleResponseDto(Long id, String userName, Long userId, String title, String contents, Timestamp timestamp){
         this.id = id;
         this.userName = userName;
+        this.userId = userId;
         this.title = title;
         this.contents = contents;
         this.createAt = timestamp;
