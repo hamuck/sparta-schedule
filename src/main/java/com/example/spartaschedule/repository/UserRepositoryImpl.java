@@ -22,6 +22,7 @@ public class UserRepositoryImpl implements UserRepository{
         this.jdbcTemplate =new JdbcTemplate(datasource);
     }
 
+    //스케쥴을 생성할때 User도 같이 생성하기 위해 사용한다.
     public Number saveUserToSchedule(Schedule schedule){
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("User")
@@ -33,6 +34,7 @@ public class UserRepositoryImpl implements UserRepository{
         return key;
     }
 
+    //User 정보를 입력받아 생성할 때 사용한다.
     @Override
     public UserResponseDto saveUser(User user){
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);

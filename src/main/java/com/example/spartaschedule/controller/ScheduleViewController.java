@@ -16,11 +16,11 @@ public class ScheduleViewController {
     public ScheduleViewController(ScheduleService scheduleService){
         this.scheduleService = scheduleService;
     }
-    // 모든 스케줄 목록 조회 (HTML 페이지로 출력)
+    //스케쥴을 입력하는 schedule.html로 연결
     @GetMapping("/view")
     public String viewSchedules() {
         List<ScheduleResponseDto> schedules = scheduleService.findAllSchedules();
-        return "schedule";  // 'sparta.html' 템플릿 반환
+        return "schedule";
     }
 
 

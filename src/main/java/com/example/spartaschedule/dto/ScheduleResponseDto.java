@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 
 @Getter
 public class ScheduleResponseDto {
+    //정보를 보낼때 사용하는 dto
     private Long id;
     private Long userId;
     private String userName;
@@ -29,7 +30,7 @@ public class ScheduleResponseDto {
         this.title = title;
         this.contents = contents;
         this.createAt = timestamp;
-        this.updateAt = timestamp;
+        this.updateAt = timestamp;  //스케쥴을 생성할때 쓰는 timestamp이므로 updateAt은 createAt과 같다
     }
 
     public ScheduleResponseDto(Long id, String userName, Long userId, String title, String contents, Timestamp timestamp){
@@ -39,6 +40,6 @@ public class ScheduleResponseDto {
         this.title = title;
         this.contents = contents;
         this.createAt = timestamp;
-        this.updateAt = timestamp;
+        this.updateAt = timestamp; //스케쥴을 생성할때 쓰는 timestamp이므로 updateAt은 createAt과 같다
     }
 }

@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 
 @Getter
 public class Schedule {
-
     private Long id;
     private String password;
     private Long userId;

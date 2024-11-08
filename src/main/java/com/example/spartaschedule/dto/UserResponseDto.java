@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 
 @Getter
 public class UserResponseDto {
+    //user 정보를 전달할때 사용하는 dto
     private Long id;
     private String name;
     private String mail;
