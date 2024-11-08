@@ -341,7 +341,8 @@ PathVariable로 받은 숫자 값 전의 날짜들의 일정을 보여줍니다.
 
 # ERD
 
-![스크린샷 2024-11-01 오전 10 36 41](https://github.com/user-attachments/assets/47b24f10-7a35-4a50-bc0b-332e97364e39)
+![스크린샷 2024-11-08 오전 10 40 14](https://github.com/user-attachments/assets/1d2becb9-a8f9-4799-9b3f-67c3dd2e9433)
+
 
 
 
